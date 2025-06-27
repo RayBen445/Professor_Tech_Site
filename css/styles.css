@@ -1,0 +1,51 @@
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 60s ease infinite;
+    color: #fff;
+}
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: rgba(0,0,0,0.4);
+}
+#menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    width: 200px;
+    height: 100%;
+    padding: 1rem;
+    display: none;
+}
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+#sidebar ul li {
+    margin: 1rem 0;
+}
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+#sidebar.show {
+    display: block;
+}
