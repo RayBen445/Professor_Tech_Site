@@ -87,3 +87,33 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+// Bible Viewer
+let bibleData = {};
+fetch("js/bible.json")
+  .then(res => res.json())
+  .then(data => {
+    bibleData = data;
+    const bookSelect = document.getElementById("book-select");
+    bookSelect.innerHTML = Object.keys(bibleData).map(book => 
+      `<option value="\${book}">\${book}</option>`).join('');
+    updateChapters(); // Load chapters for the first book
+  });
+
+function updateChapters() {
+  const book = document.getElementById("book-select").value;
+  const chapterSelect = document.getElementById("chapter-select");
+  chapterSelect.innerHTML = Object.keys(bibleData[book]).map(chap =>
+    `<option value="\${chap}">\${chap}</option>`).join('');
+}
+
+document.getElementById("book-select").addEventListener("change", updateChapters);
+
+function loadVerses() {
+  const book = document.getElementById("book-select").value;
+  const chapter = document.getElementById("chapter-select").value;
+  const verses = bibleData[book][chapter];
+  const display = document.getElementById("verse-display");
+  display.innerHTML = Object.entries(verses).map(([v, text]) =>
+    `<p><strong>Verse \${v}:</strong> \${text}</p>`).join('');
+}
