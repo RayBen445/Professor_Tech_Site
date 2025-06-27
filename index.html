@@ -1,44 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Professor_Tech</title>
-<link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <title>Professor_Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
 </head>
 <body>
-<header>
-  <button id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-  <button id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
-  <div class="datetime-location">
-    <span id="datetime"></span>
-    <span id="location"></span>
-  </div>
-</header>
-
-<nav id="sidebar" class="hidden">
-  <ul>
-    <li><a href="#bible">Bible</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#dictionary">Dictionary</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<main>
-  <section id="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li>Phone: <a href="tel:08075614248">08075614248</a></li>
-      <li>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></li>
-      <li>WhatsApp: <a href="https://wa.me/2348075614248" target="_blank">Chat</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/heritage-oladoye-962a28341" target="_blank">Profile</a></li>
-      <li>GitHub: <a href="https://github.com/RayBen445" target="_blank">GitHub</a></li>
-    </ul>
-  </section>
-</main>
-
-<script src="js/main.js"></script>
+    <header>
+        <button id="menu-toggle">&#9776;</button>
+        <div class="datetime-location">
+            <span id="datetime"></span>
+            <span id="location"></span>
+        </div>
+    </header>
+    <nav id="sidebar" class="hidden">
+        <ul>
+            <li><a href="#bible">Bible</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#dictionary">Dictionary</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#apps">Download Apps</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="bible">
+            <h2>Bible Viewer</h2>
+            <select id="bible-version">
+                <option value="kjv">KJV</option>
+                <option value="niv">NIV</option>
+                <option value="esv">ESV</option>
+                <option value="nasb">NASB</option>
+                <option value="nkjv">NKJV</option>
+            </select>
+            <div id="bible-text">Select a version to load verses...</div>
+        </section>
+        <section id="games">
+            <h2>Tic Tac Toe</h2>
+            <div id="tic-tac-toe"></div>
+        </section>
+        <section id="music">
+            <h2>Music Search & Play</h2>
+            <input type="text" id="music-search" placeholder="Search for music...">
+            <button onclick="searchMusic()">Search</button>
+            <div id="music-result"></div>
+        </section>
+        <section id="dictionary">
+            <h2>Dictionary</h2>
+            <input type="text" id="dictionary-input" placeholder="Enter word...">
+            <button onclick="lookupWord()">Lookup</button>
+            <div id="dictionary-result"></div>
+        </section>
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>Email: <a href="mailto:professor@example.com">professor@example.com</a></p>
+        </section>
+        <section id="apps">
+            <h2>Download Apps</h2>
+            <p><a href="#">App 1</a></p>
+            <p><a href="#">App 2</a></p>
+        </section>
+    </main>
 </body>
 </html>
