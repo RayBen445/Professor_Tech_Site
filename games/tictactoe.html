@@ -1,0 +1,77 @@
+<!-- games/tictactoe.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #222; color: #fff; }
+    table { margin: 20px auto; border-collapse: collapse; }
+    td {
+      width: 100px; height: 100px;
+      font-size: 36px; font-weight: bold;
+      border: 2px solid #fff;
+      text-align: center; cursor: pointer;
+      background-color: #333;
+    }
+    td:hover { background-color: #444; }
+  </style>
+</head>
+<body>
+  <h1>Tic Tac Toe</h1>
+  <table id="board"></table>
+  <h2 id="result"></h2>
+  <button onclick="resetBoard()">Restart Game</button>  <script>
+    const board = document.getElementById("board");
+    let currentPlayer = "X";
+    let gameBoard = Array(3).fill().map(() => Array(3).fill(""));
+
+    function renderBoard() {
+      board.innerHTML = "";
+      for (let i = 0; i < 3; i++) {
+        const row = board.insertRow();
+        for (let j = 0; j < 3; j++) {
+          const cell = row.insertCell();
+          cell.textContent = gameBoard[i][j];
+          cell.addEventListener("click", () => makeMove(i, j));
+        }
+      }
+    }
+
+    function makeMove(i, j) {
+      if (gameBoard[i][j] || checkWinner()) return;
+      gameBoard[i][j] = currentPlayer;
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      renderBoard();
+      const winner = checkWinner();
+      if (winner) document.getElementById("result").textContent = winner + " wins!";
+      else if (isBoardFull()) document.getElementById("result").textContent = "It's a draw!";
+    }
+
+    function checkWinner() {
+      const combos = [
+        [[0,0],[0,1],[0,2]], [[1,0],[1,1],[1,2]], [[2,0],[2,1],[2,2]], // rows
+        [[0,0],[1,0],[2,0]], [[0,1],[1,1],[2,1]], [[0,2],[1,2],[2,2]], // cols
+        [[0,0],[1,1],[2,2]], [[0,2],[1,1],[2,0]]                      // diags
+      ];
+      for (let combo of combos) {
+        const [a, b, c] = combo;
+        if (gameBoard[a[0]][a[1]] && gameBoard[a[0]][a[1]] === gameBoard[b[0]][b[1]] && gameBoard[a[0]][a[1]] === gameBoard[c[0]][c[1]]) {
+          return gameBoard[a[0]][a[1]];
+        }
+      }
+      return null;
+    }
+
+    function isBoardFull() {
+      return gameBoard.flat().every(cell => cell);
+    }
+
+    function resetBoard() {
+      gameBoard = Array(3).fill().map(() => Array(3).fill(""));
+      currentPlayer = "X";
+      document.getElementById("result").textContent = "";
+      renderBoard();
+    }
+
+    renderBoard();
+  </script></body>
+</html>
