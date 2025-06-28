@@ -1,52 +1,147 @@
-<!-- dictionary.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professor_Tech Dictionary</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dictionary | Professor_Tech</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: var(--bg); color: var(--text); padding: 1rem; }
-    input[type="text"] {
-      width: 80%; max-width: 400px; padding: 10px; font-size: 16px;
-      border: 1px solid #ccc; border-radius: 8px; margin: 1rem auto;
+    :root {
+      --text: #111;
+      --bg: #fff;
     }
-    button {
-      padding: 10px 16px; font-size: 16px; border: none; border-radius: 6px;
-      background-color: #007bff; color: white; cursor: pointer;
+    [data-theme="dark"] {
+      --text: #eee;
+      --bg: #111;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 1s, color 1s;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: linear-gradient(45deg, #36d1dc, #5b86e5);
+      color: white;
+    }
+    .menu-btn {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .main {
+      text-align: center;
+      padding: 2rem;
+    }
+    input, button, select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin: 0.5rem;
     }
     .result {
       margin-top: 2rem;
+      font-style: italic;
+      background: rgba(0,0,0,0.05);
       padding: 1rem;
       border-radius: 8px;
-      background: rgba(0,0,0,0.05);
+    }
+    .voice-btn {
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      background: transparent;
     }
   </style>
 </head>
 <body>
-  <h1>📘 Dictionary</h1>
-  <p>Type a word to get its definition</p>  <input type="text" id="wordInput" placeholder="Enter a word...">
-  <button onclick="lookupWord()">Search</button>  <div class="result" id="definition"></div>  <script>
-    async function lookupWord() {
-      const word = document.getElementById("wordInput").value.trim();
-      const output = document.getElementById("definition");
-      if (!word) {
-        output.innerHTML = "Please enter a word.";
-        return;
-      }
+  <header>
+    <div class="menu-btn" onclick="location.href='index.html'">🏠</div>
+    <h1><i class="fas fa-book"></i> Dictionary</h1>
+    <button onclick="toggleTheme()">🌓</button>
+  </header>  <div class="main">
+    <p>Type or speak any word to look up its meaning:</p>
+    <input type="text" id="wordInput" placeholder="e.g. technology" />
+    <button onclick="searchDefinition()">Search</button>
+    <button class="voice-btn" onclick="startListening()" title="Speak word">
+      🎙️
+    </button><div>
+  <label for="translateLang">Translate to:</label>
+  <select id="translateLang">
+    <option value="en">English</option>
+    <option value="fr">French</option>
+    <option value="yo">Yoruba</option>
+    <option value="de">German</option>
+    <option value="es">Spanish</option>
+    <!-- Add more as needed -->
+  </select>
+</div>
 
-      output.innerHTML = "<em>Loading...</em>";
+<div id="definition" class="result">Definition will appear here.</div>
+
+  </div>  <script>
+    function toggleTheme() {
+      const theme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+    }
+
+    async function searchDefinition() {
+      const word = document.getElementById("wordInput").value.trim();
+      const result = document.getElementById("definition");
+      const lang = document.getElementById("translateLang").value;
+      if (!word) return;
+      result.innerHTML = "Searching...";
       try {
         const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-        if (!res.ok) throw new Error("Word not found");
         const data = await res.json();
-        const meanings = data[0].meanings.map(m => `
-          <h3>${m.partOfSpeech}</h3>
-          <ul>${m.definitions.map(d => `<li>${d.definition}</li>`).join('')}</ul>
-        `).join('');
-        output.innerHTML = `<h2>${data[0].word}</h2>${meanings}`;
+        if (Array.isArray(data)) {
+          const meaning = data[0].meanings[0];
+          const def = meaning.definitions[0];
+          let output = `<strong>${word}</strong><br><em>${meaning.partOfSpeech}</em><br>${def.definition}`;
+          if (def.example) output += `<br><small>Example: ${def.example}</small>`;
+          if (lang !== 'en') {
+            const translated = await translateText(def.definition, lang);
+            output += `<hr><strong>Translated:</strong> ${translated}`;
+          }
+          result.innerHTML = output;
+        } else {
+          result.innerHTML = "No definition found.";
+        }
       } catch (err) {
-        output.innerHTML = `<p><strong>Error:</strong> ${err.message}</p>`;
+        result.innerHTML = "Error fetching data.";
       }
     }
+
+    async function translateText(text, targetLang) {
+      try {
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`);
+        const data = await res.json();
+        return data[0][0][0];
+      } catch {
+        return "Translation error.";
+      }
+    }
+
+    function startListening() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("wordInput").value = transcript;
+        searchDefinition();
+      };
+
+      recognition.onerror = function() {
+        alert("Voice recognition failed.");
+      };
+
+      recognition.start();
+    }
   </script></body>
-</html>
+  </html>
