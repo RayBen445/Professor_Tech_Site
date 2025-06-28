@@ -1,16 +1,76 @@
-<!-- games/solitaire.html -->
-<!DOCTYPE html>
-<html lang="en">
+<!-- games/solitaire.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Solitaire Game (Coming Soon)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solitaire (Simple Demo)</title>
+  <link rel="stylesheet" href="../css/style.css">
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background-color: #222; color: #fff; }
-    h1 { margin-top: 20vh; }
+    body {
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .deck {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+    .card {
+      width: 60px;
+      height: 90px;
+      background: white;
+      border: 2px solid #333;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
-  <h1>Solitaire Game Coming Soon!</h1>
-  <p>This game is under construction. Stay tuned.</p>
-</body>
+  <h1>🃏 Solitaire (Demo)</h1>
+  <p>Click any card to flip it. This is a basic simulation; full logic coming later.</p>
+  <div class="deck" id="deck"></div>  <script>
+    const suits = ['♠', '♥', '♦', '♣'];
+    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+    function generateDeck() {
+      const deck = [];
+      for (let suit of suits) {
+        for (let value of values) {
+          deck.push(`${value}${suit}`);
+        }
+      }
+      return deck.sort(() => Math.random() - 0.5);
+    }
+
+    function renderDeck() {
+      const deck = generateDeck();
+      const deckDiv = document.getElementById('deck');
+      deckDiv.innerHTML = '';
+      for (let card of deck.slice(0, 12)) {
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'card';
+        cardDiv.textContent = '?';
+        cardDiv.onclick = () => {
+          cardDiv.textContent = card;
+          cardDiv.style.background = card.includes('♥') || card.includes('♦') ? '#ffe5e5' : '#e5e5ff';
+        };
+        deckDiv.appendChild(cardDiv);
+      }
+    }
+
+    renderDeck();
+  </script></body>
 </html>
