@@ -1,51 +1,273 @@
-
+/* Global styles */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBG 60s ease infinite;
-    color: #fff;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: background-image 2s ease-in-out;
+  background-color: #fff;
+  color: #111;
 }
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+
+/* Light and Dark Theme support */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #f1f1f1;
 }
+
+body[data-theme="dark"] header,
+body[data-theme="dark"] #sidebar,
+body[data-theme="dark"] footer {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+body[data-theme="dark"] a {
+  color: #80dfff;
+}
+
+/* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 #menu-toggle {
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 1rem;
 }
+
+h1 {
+  margin: 0;
+}
+
+/* Sidebar */
 #sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-    width: 200px;
-    height: 100%;
-    padding: 1rem;
-    display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  padding: 1rem;
+  display: none;
+  z-index: 999;
 }
-#sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-#sidebar ul li {
-    margin: 1rem 0;
-}
-#sidebar ul li a {
-    color: white;
-    text-decoration: none;
-}
+
 #sidebar.show {
-    display: block;
+  display: block;
 }
+
+#sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar li {
+  margin: 1rem 0;
+}
+
+#sidebar a {
+  text-decoration: none;
+  color: #333;
+}
+
+body[data-theme="dark"] #sidebar {
+  background: #1f1f1f;
+}
+
+/* Main content */
+main {
+  padding: 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+/* Search bar */
+#global-search {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Bible verses */
+#verse-display {
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #eee;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #sidebar {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #menu-toggle {
+    font-size: 20px;
+  }
+}/* Global styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: background-image 2s ease-in-out;
+  background-color: #fff;
+  color: #111;
+}
+
+/* Light and Dark Theme support */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body[data-theme="dark"] header,
+body[data-theme="dark"] #sidebar,
+body[data-theme="dark"] footer {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+body[data-theme="dark"] a {
+  color: #80dfff;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  padding: 1rem;
+  display: none;
+  z-index: 999;
+}
+
+#sidebar.show {
+  display: block;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar li {
+  margin: 1rem 0;
+}
+
+#sidebar a {
+  text-decoration: none;
+  color: #333;
+}
+
+body[data-theme="dark"] #sidebar {
+  background: #1f1f1f;
+}
+
+/* Main content */
+main {
+  padding: 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+/* Search bar */
+#global-search {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Bible verses */
+#verse-display {
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #eee;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #sidebar {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #menu-toggle {
+    font-size: 20px;
+  }
+      }
