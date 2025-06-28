@@ -1,119 +1,71 @@
+// js/main.js
 
-document.addEventListener("DOMContentLoaded", function () {
-    const dtElement = document.getElementById("datetime");
-    const locElement = document.getElementById("location");
-    const menuToggle = document.getElementById("menu-toggle");
-    const sidebar = document.getElementById("sidebar");
+// Sidebar toggle
+const menu = document.getElementById("menu-toggle");
+const sidebar = document.getElementById("sidebar");
 
-    function updateTime() {
-        const now = new Date();
-        dtElement.textContent = now.toLocaleString();
-    }
-
-    function updateLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(pos => {
-                locElement.textContent = `Lat: ${pos.coords.latitude.toFixed(2)}, Long: ${pos.coords.longitude.toFixed(2)}`;
-            }, () => {
-                locElement.textContent = "Location unavailable";
-            });
-        } else {
-            locElement.textContent = "Geolocation not supported";
-        }
-    }
-
-    menuToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("show");
-    });
-
-    updateTime();
-    updateLocation();
-    setInterval(updateTime, 1000);
-
-    // Bible API fetch
-    const bibleVersionSelect = document.getElementById("bible-version");
-    const bibleTextDiv = document.getElementById("bible-text");
-
-    bibleVersionSelect.addEventListener("change", () => {
-        const version = bibleVersionSelect.value;
-        const passage = "John 3:16";
-        if (version === "kjv") {
-            fetch(`https://bible-api.com/${encodeURIComponent(passage)}?translation=kjv`)
-                .then(res => res.json())
-                .then(data => {
-                    bibleTextDiv.textContent = data.text;
-                })
-                .catch(err => {
-                    bibleTextDiv.textContent = "Error loading Bible text.";
-                });
-        } else {
-            bibleTextDiv.textContent = `Version "${version}" not supported via live API yet.`;
-        }
-    });
-
-    // Load default verse
-    bibleVersionSelect.dispatchEvent(new Event("change"));
-
-    // Dictionary API fetch
-    window.lookupWord = function () {
-        const word = document.getElementById("dictionary-input").value;
-        const resultDiv = document.getElementById("dictionary-result");
-        if (!word) {
-            resultDiv.textContent = "Please enter a word.";
-            return;
-        }
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data[0]) {
-                    const meaning = data[0].meanings[0].definitions[0].definition;
-                    resultDiv.textContent = `${word}: ${meaning}`;
-                } else {
-                    resultDiv.textContent = "Definition not found.";
-                }
-            })
-            .catch(err => {
-                resultDiv.textContent = "Error fetching definition.";
-            });
-    }
-
-    // Music Search Stub
-    window.searchMusic = function () {
-        const query = document.getElementById("music-search").value;
-        const resultDiv = document.getElementById("music-result");
-        if (query) {
-            const searchURL = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-            resultDiv.innerHTML = `<a href="${searchURL}" target="_blank">Search YouTube for "${query}"</a>`;
-        }
-    }
+menu.addEventListener("click", () => {
+  sidebar.classList.toggle("hidden");
+  sidebar.classList.toggle("show");
 });
 
-// Bible Viewer
-let bibleData = {};
-fetch("js/bible.json")
-  .then(res => res.json())
-  .then(data => {
-    bibleData = data;
-    const bookSelect = document.getElementById("book-select");
-    bookSelect.innerHTML = Object.keys(bibleData).map(book => 
-      `<option value="\${book}">\${book}</option>`).join('');
-    updateChapters(); // Load chapters for the first book
-  });
+document.addEventListener("click", (e) => {
+  if (!sidebar.contains(e.target) && !menu.contains(e.target)) {
+    sidebar.classList.add("hidden");
+    sidebar.classList.remove("show");
+  }
+});
 
-function updateChapters() {
-  const book = document.getElementById("book-select").value;
-  const chapterSelect = document.getElementById("chapter-select");
-  chapterSelect.innerHTML = Object.keys(bibleData[book]).map(chap =>
-    `<option value="\${chap}">\${chap}</option>`).join('');
-}
+// Gradient background cycling (only for light mode)
+let currentGradient = 0;
+setInterval(() => {
+  if (document.body.getAttribute("data-theme") === "light") {
+    document.body.style.backgroundImage = gradients[currentGradient];
+    currentGradient = (currentGradient + 1) % gradients.length;
+  }
+}, Math.floor(Math.random() * 10000 + 10000)); // 10–20 seconds
 
-document.getElementById("book-select").addEventListener("change", updateChapters);
+// Dummy Bible data for Genesis 1 and 2
+const bible = {
+  "Genesis": {
+    "1": {
+      "1": "In the beginning God created the heaven and the earth.",
+      "2": "And the earth was without form, and void; and darkness was upon the face of the deep..."
+    },
+    "2": {
+      "1": "Thus the heavens and the earth were finished, and all the host of them.",
+      "2": "And on the seventh day God ended his work which he had made..."
+    }
+  }
+};
 
+// Load Bible verses
 function loadVerses() {
   const book = document.getElementById("book-select").value;
   const chapter = document.getElementById("chapter-select").value;
-  const verses = bibleData[book][chapter];
+  const verses = bible[book]?.[chapter];
   const display = document.getElementById("verse-display");
-  display.innerHTML = Object.entries(verses).map(([v, text]) =>
-    `<p><strong>Verse \${v}:</strong> \${text}</p>`).join('');
+  display.innerHTML = verses
+    ? Object.entries(verses).map(([v, t]) => `<p><b>${v}</b>: ${t}</p>`).join("")
+    : "<p>No data</p>";
 }
+
+// Populate Bible book and chapter dropdowns
+document.addEventListener("DOMContentLoaded", () => {
+  const bookSel = document.getElementById("book-select");
+  const chapSel = document.getElementById("chapter-select");
+
+  for (let book in bible) {
+    bookSel.innerHTML += `<option value="${book}">${book}</option>`;
+  }
+
+  bookSel.addEventListener("change", () => {
+    chapSel.innerHTML = "";
+    const chapters = bible[bookSel.value];
+    for (let ch in chapters) {
+      chapSel.innerHTML += `<option value="${ch}">${ch}</option>`;
+    }
+  });
+
+  bookSel.dispatchEvent(new Event("change"));
+});
