@@ -1,70 +1,231 @@
-<!-- index.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Professor_Tech</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/gradients.js" defer></script>
-  <script src="js/main.js" defer></script>
-</head>
-<body data-theme="light">
-  <header>
-    <div id="menu-toggle">☰</div>
-    <h1>Professor_Tech</h1>
-  </header>  <nav id="sidebar" class="hidden">
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#bible">Bible</a></li>
-      <li><a href="#music">Music</a></li>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#downloads">Downloads</a></li>
-      <li><a href="#dictionary">Dictionary</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>  <main>
-    <section id="search">
-      <input type="text" id="global-search" placeholder="Search site...">
-      <div id="search-results"></div>
-    </section><section id="bible">
-  <h2>Bible Viewer</h2>
-  <select id="book-select"></select>
-  <select id="chapter-select"></select>
-  <button onclick="loadVerses()">Load</button>
-  <div id="verse-display"></div>
-</section>
-
-<section id="music">
-  <h2>Music Player</h2>
-  <input type="file" accept="audio/*" onchange="document.getElementById('player').src=URL.createObjectURL(this.files[0])">
-  <audio id="player" controls></audio>
-</section>
-
-<section id="language">
-  <h2>Translate</h2>
-  <div id="google_translate_element"></div>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --text: #111;
+      --bg: #fff;
     }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</section>
+    [data-theme="dark"] {
+      --text: #eee;
+      --bg: #111;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      background-size: 400% 400%;
+      animation: gradientFlow 2s ease infinite;
+      color: var(--text);
+      transition: background 1s, color 1s;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    [data-theme="dark"] body {
+      background: #111 !important;
+      animation: none;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: rgba(0,0,0,0.6);
+      color: white;
+    }
+    .menu-btn {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100vh;
+      width: 250px;
+      background: #222;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      z-index: 999;
+      transition: left 0.4s ease;
+    }
+    #sidebar.open {
+      left: 0;
+    }
+    #sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 0.5rem 0;
+    }
+    .main {
+      text-align: center;
+      padding: 2rem;
+    }
+    .dictionary, .music-search {
+      margin-top: 2rem;
+    }
+    input, select {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+    }
+    .result {
+      margin-top: 1rem;
+      font-style: italic;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      z-index: 998;
+    }
+    #overlay.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay" onclick="closeSidebar()"></div>
+  <header>
+    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+    <h1><i class="fas fa-laptop-code"></i> Professor_Tech</h1>
+    <div>
+      <select id="langSelect" onchange="changeLang()">
+        <option value="en">🌐 EN</option>
+        <option value="es">ES</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="yo">YO</option>
+        <!-- Add more languages as needed -->
+      </select>
+      <button onclick="toggleTheme()">🌓</button>
+    </div>
+  </header>  <div id="sidebar">
+    <h2>Menu</h2>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="dictionary.html"><i class="fas fa-book"></i> Dictionary</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="games/spades.html">♠ Spades</a>
+    <a href="games/solitaire.html">♦ Solitaire</a>
+    <a href="games/ludo.html">🎲 Ludo</a>
+    <a href="games/snake.html">🐍 Snake</a>
+    <a href="games/tictactoe.html">⭕ TicTacToe</a>
+  </div>  <div class="main">
+    <h2 id="welcomeText">Welcome to Professor_Tech</h2>
+    <p>This is your daily hub for knowledge, tools, and games.</p><p id="datetime"></p>
+<p id="bible-verse"><em>Loading Bible verse...</em></p>
 
-<section id="downloads">
-  <h2>App Downloads</h2>
-  <a href="apps/sample_app.apk" download>Download Sample App</a>
-</section>
+<div class="dictionary">
+  <h3>Dictionary</h3>
+  <input type="text" id="wordInput" placeholder="Enter word...">
+  <button onclick="searchDefinition()">Search</button>
+  <div id="definition" class="result"></div>
+</div>
 
-<section id="games">
-  <h2>Games</h2>
-  <ul>
-    <li><a href="games/snake.html" target="_blank">Play Snake</a></li>
-    <li><a href="games/tictactoe.html" target="_blank">Play Tic Tac Toe</a></li>
-  </ul>
-</section>
+<div class="music-search">
+  <h3>Music Search</h3>
+  <input type="text" id="musicInput" placeholder="Search songs...">
+  <button onclick="searchMusic()">Find</button>
+  <div id="musicResults" class="result"></div>
+</div>
 
-  </main>  <footer>
-    <p>&copy; 2025 Professor_Tech</p>
-  </footer>
-</body>
-    </html>
+  </div>  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("show");
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").classList.remove("open");
+      document.getElementById("overlay").classList.remove("show");
+    }
+
+    function toggleTheme() {
+      const theme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+    }
+
+    async function searchDefinition() {
+      const word = document.getElementById("wordInput").value.trim();
+      const result = document.getElementById("definition");
+      if (!word) return;
+      result.innerHTML = "Searching...";
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        const data = await res.json();
+        if (data[0]?.meanings?.length > 0) {
+          const def = data[0].meanings[0].definitions[0].definition;
+          result.innerHTML = `<strong>${word}:</strong> ${def}`;
+        } else {
+          result.innerHTML = "Definition not found.";
+        }
+      } catch (e) {
+        result.innerHTML = "Error fetching definition.";
+      }
+    }
+
+    async function searchMusic() {
+      const song = document.getElementById("musicInput").value.trim();
+      const container = document.getElementById("musicResults");
+      if (!song) return;
+      container.innerHTML = "Searching music...";
+      try {
+        const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song)}&limit=5`);
+        const data = await response.json();
+        container.innerHTML = data.results.map(track => `
+          <div>
+            <strong>${track.trackName}</strong> by ${track.artistName}<br>
+            <audio controls src="${track.previewUrl}"></audio>
+          </div>
+        `).join('<hr>');
+      } catch (e) {
+        container.innerHTML = "Error loading music.";
+      }
+    }
+
+    function updateTime() {
+      const dt = new Date();
+      document.getElementById("datetime").textContent = dt.toLocaleString();
+    }
+
+    async function loadVerse() {
+      try {
+        const res = await fetch("https://beta.ourmanna.com/api/v1/get/?format=json");
+        const data = await res.json();
+        const verse = data.verse.details.text + " — " + data.verse.details.reference;
+        document.getElementById("bible-verse").textContent = verse;
+      } catch (e) {
+        document.getElementById("bible-verse").textContent = "Failed to load Bible verse.";
+      }
+    }
+
+    function changeLang() {
+      const lang = document.getElementById("langSelect").value;
+      alert(`Language switching (demo): ${lang}`);
+      // Implement real i18n switching if desired
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+    loadVerse();
+  </script></body>
+  </html>
