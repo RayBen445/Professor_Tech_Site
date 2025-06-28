@@ -1,0 +1,69 @@
+<!-- bible.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor_Tech Bible</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { padding: 1rem; background: var(--bg); color: var(--text); font-family: sans-serif; }
+    select, button, input { padding: 8px; border-radius: 6px; font-size: 16px; }
+    #bibleText { margin-top: 1rem; white-space: pre-wrap; background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>📖 Full Bible</h1><label for="version">Version:</label> <select id="version"> <option value="kjv">King James Version</option> <option value="niv">New International Version</option> <option value="nlt">New Living Translation</option> <option value="esv">English Standard Version</option> <option value="msg">The Message</option> </select>
+
+<br><br> <label for="book">Book:</label> <select id="book"></select>
+
+<label for="chapter">Chapter:</label> <select id="chapter"></select>
+
+<button onclick="loadBible()">Read</button>
+
+  <div id="bibleText">📖 Please select a book and chapter.</div>  <script>
+    const books = [
+      "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
+      "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs",
+      "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+      "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi",
+      "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians",
+      "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon",
+      "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"
+    ];
+
+    const bookSelect = document.getElementById("book");
+    const chapterSelect = document.getElementById("chapter");
+    books.forEach(book => {
+      const opt = document.createElement("option");
+      opt.value = opt.text = book;
+      bookSelect.appendChild(opt);
+    });
+
+    bookSelect.addEventListener("change", () => {
+      chapterSelect.innerHTML = "";
+      let chapters = 50; // Default max, adjust with book mapping later
+      for (let i = 1; i <= chapters; i++) {
+        const opt = document.createElement("option");
+        opt.value = opt.text = i;
+        chapterSelect.appendChild(opt);
+      }
+    });
+
+    async function loadBible() {
+      const book = document.getElementById("book").value;
+      const chapter = document.getElementById("chapter").value;
+      const version = document.getElementById("version").value;
+      const container = document.getElementById("bibleText");
+
+      container.innerHTML = "<em>Loading...</em>";
+      try {
+        const res = await fetch(`https://bible-api.com/${book}%20${chapter}?translation=${version}`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        const text = data.verses.map(v => `${v.verse}: ${v.text}`).join('\n');
+        container.innerHTML = `📘 <strong>${book} ${chapter}</strong> (${version.toUpperCase()})\n\n${text}`;
+      } catch (e) {
+        container.innerHTML = `<p><strong>Error:</strong> ${e.message}</p>`;
+      }
+    }
+  </script></body>
+</html>
