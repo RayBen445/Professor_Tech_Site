@@ -1,0 +1,48 @@
+<!-- music/player.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Search | Professor_Tech</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; background: var(--bg); color: var(--text); }
+    input[type="text"] {
+      width: 90%; max-width: 500px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 16px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;
+    }
+    audio { width: 100%; margin-top: 1rem; }
+    .track {
+      background: rgba(0,0,0,0.05); padding: 1rem; margin: 1rem 0; border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Music Search</h1>
+  <p>Type a song title to search and play (demo only)</p>  <input type="text" id="musicInput" placeholder="Search music...">
+  <button onclick="searchMusic()">Search</button>  <div id="results"></div>  <script>
+    async function searchMusic() {
+      const keyword = document.getElementById('musicInput').value.trim();
+      const results = document.getElementById('results');
+      if (!keyword) return results.innerHTML = '<p>Please enter a song name.</p>';
+      results.innerHTML = '<em>Searching...</em>';
+
+      // Demo static results for now (no API key needed)
+      results.innerHTML = `
+        <div class="track">
+          <h3>${keyword} (Sample 1)</h3>
+          <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="track">
+          <h3>${keyword} (Sample 2)</h3>
+          <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      `;
+    }
+  </script></body>
+</html>
