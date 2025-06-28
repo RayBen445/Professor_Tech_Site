@@ -1,4 +1,4 @@
-Professor_Tech Static Site
+# Professor_Tech Static Site
 
 This is a fully-featured static website built by Professor 👨‍🏫📚. It includes:
 
@@ -19,7 +19,7 @@ This is a fully-featured static website built by Professor 👨‍🏫📚. It i
 🌓 Light/Dark mode with 5000+ animated gradient backgrounds (light mode only)
 
 
-🌐 Technologies Used
+# 🌐 Technologies Used
 
 HTML5
 
@@ -30,7 +30,7 @@ JavaScript (Vanilla)
 Render for deployment
 
 
-🚀 Project Structure
+# 🚀 Project Structure
 
 professor_tech/
 ├── index.html
@@ -58,7 +58,7 @@ professor_tech/
 ├── LICENSE
 └── README.md
 
-📦 Deployment
+# 📦 Deployment
 
 You can deploy this site on Render or GitHub Pages.
 
@@ -72,7 +72,7 @@ https://github.com/yourusername/professor_tech.git
 
 ---
 
-📬 Contact
+# 📬 Contact
 
 Phone: 08075614248
 
