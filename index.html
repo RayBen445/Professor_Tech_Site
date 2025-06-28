@@ -1,70 +1,31 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!-- index.html --><!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Professor_Tech</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/main.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professor_Tech</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/gradients.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
-<body>
-    <header>
-        <button id="menu-toggle">&#9776;</button>
-        <div class="datetime-location">
-            <span id="datetime"></span>
-            <span id="location"></span>
-        </div>
-    </header>
-    <nav id="sidebar" class="hidden">
-        <ul>
-            <li><a href="#bible">Bible</a></li>
-            <li><a href="#games">Games</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#dictionary">Dictionary</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#apps">Download Apps</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="bible">
-            <h2>Bible Viewer</h2>
-            <select id="bible-version">
-                <option value="kjv">KJV</option>
-                <option value="niv">NIV</option>
-                <option value="esv">ESV</option>
-                <option value="nasb">NASB</option>
-                <option value="nkjv">NKJV</option>
-            </select>
-            <div id="bible-text">Select a version to load verses...</div>
-        </section>
-        <section id="games">
-            <h2>Tic Tac Toe</h2>
-            <div id="tic-tac-toe"></div>
-        </section>
-        <section id="music">
-            <h2>Music Search & Play</h2>
-            <input type="text" id="music-search" placeholder="Search for music...">
-            <button onclick="searchMusic()">Search</button>
-            <div id="music-result"></div>
-        </section>
-        <section id="dictionary">
-            <h2>Dictionary</h2>
-            <input type="text" id="dictionary-input" placeholder="Enter word...">
-            <button onclick="lookupWord()">Lookup</button>
-            <div id="dictionary-result"></div>
-        </section>
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:professor@example.com">professor@example.com</a></p>
-        </section>
-        <section id="apps">
-            <h2>Download Apps</h2>
-            <p><a href="#">App 1</a></p>
-            <p><a href="#">App 2</a></p>
-        </section>
-    
-<section id="bible">
+<body data-theme="light">
+  <header>
+    <div id="menu-toggle">☰</div>
+    <h1>Professor_Tech</h1>
+  </header>  <nav id="sidebar" class="hidden">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#bible">Bible</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#downloads">Downloads</a></li>
+      <li><a href="#dictionary">Dictionary</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>  <main>
+    <section id="search">
+      <input type="text" id="global-search" placeholder="Search site...">
+      <div id="search-results"></div>
+    </section><section id="bible">
   <h2>Bible Viewer</h2>
   <select id="book-select"></select>
   <select id="chapter-select"></select>
@@ -72,6 +33,38 @@
   <div id="verse-display"></div>
 </section>
 
-</main>
+<section id="music">
+  <h2>Music Player</h2>
+  <input type="file" accept="audio/*" onchange="document.getElementById('player').src=URL.createObjectURL(this.files[0])">
+  <audio id="player" controls></audio>
+</section>
+
+<section id="language">
+  <h2>Translate</h2>
+  <div id="google_translate_element"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</section>
+
+<section id="downloads">
+  <h2>App Downloads</h2>
+  <a href="apps/sample_app.apk" download>Download Sample App</a>
+</section>
+
+<section id="games">
+  <h2>Games</h2>
+  <ul>
+    <li><a href="games/snake.html" target="_blank">Play Snake</a></li>
+    <li><a href="games/tictactoe.html" target="_blank">Play Tic Tac Toe</a></li>
+  </ul>
+</section>
+
+  </main>  <footer>
+    <p>&copy; 2025 Professor_Tech</p>
+  </footer>
 </body>
-</html>
+    </html>
