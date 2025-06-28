@@ -1,0 +1,52 @@
+<!-- dictionary.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professor_Tech Dictionary</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: var(--bg); color: var(--text); padding: 1rem; }
+    input[type="text"] {
+      width: 80%; max-width: 400px; padding: 10px; font-size: 16px;
+      border: 1px solid #ccc; border-radius: 8px; margin: 1rem auto;
+    }
+    button {
+      padding: 10px 16px; font-size: 16px; border: none; border-radius: 6px;
+      background-color: #007bff; color: white; cursor: pointer;
+    }
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 Dictionary</h1>
+  <p>Type a word to get its definition</p>  <input type="text" id="wordInput" placeholder="Enter a word...">
+  <button onclick="lookupWord()">Search</button>  <div class="result" id="definition"></div>  <script>
+    async function lookupWord() {
+      const word = document.getElementById("wordInput").value.trim();
+      const output = document.getElementById("definition");
+      if (!word) {
+        output.innerHTML = "Please enter a word.";
+        return;
+      }
+
+      output.innerHTML = "<em>Loading...</em>";
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        if (!res.ok) throw new Error("Word not found");
+        const data = await res.json();
+        const meanings = data[0].meanings.map(m => `
+          <h3>${m.partOfSpeech}</h3>
+          <ul>${m.definitions.map(d => `<li>${d.definition}</li>`).join('')}</ul>
+        `).join('');
+        output.innerHTML = `<h2>${data[0].word}</h2>${meanings}`;
+      } catch (err) {
+        output.innerHTML = `<p><strong>Error:</strong> ${err.message}</p>`;
+      }
+    }
+  </script></body>
+</html>
