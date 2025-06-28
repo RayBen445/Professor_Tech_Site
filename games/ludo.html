@@ -1,16 +1,98 @@
-<!-- games/ludo.html -->
-<!DOCTYPE html>
-<html lang="en">
+<!-- games/ludo.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ludo Game (Coming Soon)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ludo Game</title>
+  <link rel="stylesheet" href="../css/style.css" />
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background-color: #222; color: #fff; }
-    h1 { margin-top: 20vh; }
+    body {
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    canvas {
+      background: #fff;
+      border: 2px solid #333;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Ludo Game Coming Soon!</h1>
-  <p>This game is under construction. Stay tuned.</p>
-</body>
+  <h1>🟢 Ludo Game (2 Players)</h1>
+  <button onclick="rollDice()" id="rollBtn">🎲 Roll Dice</button>
+  <p id="diceValue">Value: -</p>
+  <p id="turnDisplay">Current Player: 🔵</p>
+  <canvas id="ludoCanvas" width="300" height="300"></canvas>  <script>
+    const canvas = document.getElementById("ludoCanvas");
+    const ctx = canvas.getContext("2d");
+    const cellSize = 30;
+    const gridSize = 10;
+    const totalCells = gridSize * gridSize;
+
+    const players = [
+      { x: 0, y: 0, color: "blue", name: "🔵" },
+      { x: 0, y: 0, color: "red", name: "🔴" }
+    ];
+    let currentPlayerIndex = 0;
+    let gameOver = false;
+
+    function drawBoard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#ccc";
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          ctx.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
+        }
+      }
+      drawTokens();
+    }
+
+    function drawTokens() {
+      for (let player of players) {
+        ctx.fillStyle = player.color;
+        ctx.beginPath();
+        ctx.arc(
+          player.x * cellSize + cellSize / 2,
+          player.y * cellSize + cellSize / 2,
+          cellSize / 3,
+          0, Math.PI * 2
+        );
+        ctx.fill();
+      }
+    }
+
+    function rollDice() {
+      if (gameOver) return;
+      const value = Math.floor(Math.random() * 6) + 1;
+      document.getElementById("diceValue").textContent = `Value: ${value}`;
+      moveToken(currentPlayerIndex, value);
+      if (!gameOver) {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        document.getElementById("turnDisplay").textContent = `Current Player: ${players[currentPlayerIndex].name}`;
+      }
+    }
+
+    function moveToken(index, steps) {
+      const player = players[index];
+      let pos = player.y * gridSize + player.x;
+      pos = Math.min(pos + steps, totalCells - 1);
+      player.x = pos % gridSize;
+      player.y = Math.floor(pos / gridSize);
+      drawBoard();
+
+      if (pos === totalCells - 1) {
+        document.getElementById("turnDisplay").textContent = `${player.name} wins the game! 🎉`;
+        document.getElementById("rollBtn").disabled = true;
+        gameOver = true;
+      }
+    }
+
+    drawBoard();
+  </script></body>
 </html>
