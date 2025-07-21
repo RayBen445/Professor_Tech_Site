@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,44 +15,36 @@
       <a href="https://t.me/ProfTechMVAIbot" target="_blank" class="btn">🤖 Telegram Bot</a>
       <a href="https://github.com/Professor-Tech" target="_blank" class="btn">🌟 GitHub</a>
     </div>
-  </header>
-
-  <main>
+  </header>  <main>
     <section id="about">
       <h2>🚀 About Me</h2>
-      <p>
-        I'm Professor 👨‍🏫📚 — Developer, Economics Student, and AI Architect. I love building intelligent bots, economic systems, and automated tech using Termux, GPT, Node.js, and SQLite.
-      </p>
-    </section>
+      <p><span id="about-text" class="typed-text-alt"></span><span class="cursor-alt">|</span></p>
+    </section><section id="projects">
+  <h2>💡 Featured Projects</h2>
+  <ul>
+    <li><span class="project-typed" data-text="Prof-Tech MVAI – Multi-AI bot with GPT-4o, Gemini, Meta + fallback logic"></span></li>
+    <li><span class="project-typed" data-text="Lautech Economics Portal – Student dashboard, secure login, course viewer"></span></li>
+    <li><span class="project-typed" data-text="Cool Shot Games – Upgraded browser games: Solitaire, Spades, AI, animations"></span></li>
+  </ul>
+</section>
 
-    <section id="projects">
-      <h2>💡 Featured Projects</h2>
-      <ul>
-        <li><strong>Prof-Tech MVAI</strong> – Multi-AI bot with GPT-4o, Gemini, Meta + fallback logic</li>
-        <li><strong>Lautech Economics Portal</strong> – Student dashboard, secure login, course viewer</li>
-        <li><strong>Cool Shot Games</strong> – Upgraded browser games: Solitaire, Spades, AI, animations</li>
-      </ul>
-    </section>
+<section id="github">
+  <h2>📈 GitHub Stats</h2>
+  <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
+</section>
 
-    <section id="github">
-      <h2>📊 GitHub Stats</h2>
-      <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
-    </section>
+<section id="contact">
+  <h2>📬 Contact Me</h2>
+  <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
+  <p>Telegram: <a href="https://t.me/ProfTechMVAI_Bot" target="_blank">@ProfTechMVAI_Bot</a></p>
+  <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
+</section>
 
-    <section id="contact">
-      <h2>📬 Contact Me</h2>
-      <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
-      <p>Telegram: <a href="https://t.me/ProfTechMVAI_Bot" target="_blank">@ProfTechMVAI_Bot</a></p>
-      <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
-    </section>
-  </main>
-
-  <footer>
+  </main>  <footer>
     <p>© 2025 Professor-Tech. Built with ❤️ and Termux.</p>
-  </footer>
-
-  <script>
+  </footer>  <script>
+    // Banner typing
     const typedText = document.querySelector(".typed-text");
     const cursor = document.querySelector(".cursor");
     const phrases = [
@@ -85,6 +76,54 @@
     }
 
     type();
-  </script>
-</body>
-</html>
+
+    // About typing
+    const aboutPhrases = [
+      "I'm Professor 👨‍🏫📚 — Developer, Economics Student, and AI Architect.",
+      "I love building intelligent bots, economic systems, and automated tech.",
+      "My tools include Termux, GPT APIs, Node.js, and SQLite databases."
+    ];
+    const aboutEl = document.getElementById("about-text");
+    const cursorAlt = document.querySelector(".cursor-alt");
+    let a = 0, b = 0, aDeleting = false;
+
+    function typeAbout() {
+      let text = aboutPhrases[a];
+      if (!aDeleting) {
+        aboutEl.textContent = text.substring(0, b++);
+        if (b > text.length) {
+          aDeleting = true;
+          setTimeout(typeAbout, 1500);
+          return;
+        }
+      } else {
+        aboutEl.textContent = text.substring(0, b--);
+        if (b < 0) {
+          a = (a + 1) % aboutPhrases.length;
+          aDeleting = false;
+        }
+      }
+      setTimeout(typeAbout, aDeleting ? 40 : 90);
+    }
+
+    setTimeout(typeAbout, 2000);
+
+    // Typing animation for each project <span>
+    function animateText(el, delay = 0) {
+      const text = el.getAttribute("data-text");
+      let idx = 0;
+
+      function draw() {
+        el.textContent = text.substring(0, idx++);
+        if (idx <= text.length) setTimeout(draw, 40);
+      }
+
+      setTimeout(draw, delay);
+    }
+
+    const projectSpans = document.querySelectorAll(".project-typed");
+    projectSpans.forEach((el, index) => {
+      animateText(el, 3000 + index * 1200);
+    });
+  </script></body>
+  </html>
