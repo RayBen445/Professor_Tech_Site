@@ -1,273 +1,146 @@
-/* Global styles */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  transition: background-image 2s ease-in-out;
-  background-color: #fff;
-  color: #111;
-}
-
-/* Light and Dark Theme support */
-body[data-theme="dark"] {
-  background-color: #121212;
-  color: #f1f1f1;
-}
-
-body[data-theme="dark"] header,
-body[data-theme="dark"] #sidebar,
-body[data-theme="dark"] footer {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-body[data-theme="dark"] a {
-  color: #80dfff;
-}
-
-/* Header */
-header {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-#menu-toggle {
-  font-size: 24px;
-  cursor: pointer;
-  margin-right: 1rem;
-}
-
-h1 {
-  margin: 0;
-}
-
-/* Sidebar */
-#sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100%;
-  background: #f4f4f4;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-  padding: 1rem;
-  display: none;
-  z-index: 999;
-}
-
-#sidebar.show {
-  display: block;
-}
-
-#sidebar ul {
-  list-style-type: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  line-height: 1.6;
   padding: 0;
   margin: 0;
 }
 
-#sidebar li {
-  margin: 1rem 0;
+/* Header */
+header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-#sidebar a {
+header img.banner {
+  max-width: 280px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #00ffcc;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #00ffd5;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+}
+
+/* Typing Animation Cursor */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  background-color: #00ffd5;
+  margin-left: 5px;
+  animation: blink 0.7s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  0%, 100% { background: #00ffd5; }
+  50% { background: transparent; }
+}
+
+/* Button group */
+.btn-group {
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  margin: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  background: #00ffd5;
+  color: #000;
   text-decoration: none;
-  color: #333;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-body[data-theme="dark"] #sidebar {
-  background: #1f1f1f;
+.btn:hover {
+  background: #00bfa6;
+  color: white;
+  transform: scale(1.05);
 }
 
-/* Main content */
+/* Main Sections */
 main {
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
 section {
-  margin-bottom: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  margin: 1rem auto;
+  border-radius: 15px;
+  max-width: 850px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1);
 }
 
-/* Search bar */
-#global-search {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 16px;
-  margin-bottom: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+section h2 {
+  color: #00ffd5;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  text-align: center;
 }
 
-/* Bible verses */
-#verse-display {
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  max-height: 300px;
-  overflow-y: auto;
+section ul {
+  list-style-type: square;
+  margin-left: 1.2rem;
+}
+
+section a {
+  color: #00ffd5;
+  text-decoration: none;
+}
+
+section a:hover {
+  text-decoration: underline;
+}
+
+/* GitHub stats images */
+section#github img {
+  max-width: 100%;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #eee;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #aaa;
+  font-size: 0.9rem;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 600px) {
-  #sidebar {
-    width: 200px;
+  header h1 {
+    font-size: 2rem;
   }
 
-  h1 {
-    font-size: 1.2rem;
+  section {
+    padding: 1rem;
   }
 
-  #menu-toggle {
-    font-size: 20px;
+  .btn {
+    width: 90%;
+    display: block;
+    margin: 0.5rem auto;
   }
-}/* Global styles */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  transition: background-image 2s ease-in-out;
-  background-color: #fff;
-  color: #111;
-}
-
-/* Light and Dark Theme support */
-body[data-theme="dark"] {
-  background-color: #121212;
-  color: #f1f1f1;
-}
-
-body[data-theme="dark"] header,
-body[data-theme="dark"] #sidebar,
-body[data-theme="dark"] footer {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-body[data-theme="dark"] a {
-  color: #80dfff;
-}
-
-/* Header */
-header {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-#menu-toggle {
-  font-size: 24px;
-  cursor: pointer;
-  margin-right: 1rem;
-}
-
-h1 {
-  margin: 0;
-}
-
-/* Sidebar */
-#sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100%;
-  background: #f4f4f4;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-  padding: 1rem;
-  display: none;
-  z-index: 999;
-}
-
-#sidebar.show {
-  display: block;
-}
-
-#sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-#sidebar li {
-  margin: 1rem 0;
-}
-
-#sidebar a {
-  text-decoration: none;
-  color: #333;
-}
-
-body[data-theme="dark"] #sidebar {
-  background: #1f1f1f;
-}
-
-/* Main content */
-main {
-  padding: 1rem;
-}
-
-section {
-  margin-bottom: 2rem;
-}
-
-/* Search bar */
-#global-search {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 16px;
-  margin-bottom: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Bible verses */
-#verse-display {
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #eee;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  #sidebar {
-    width: 200px;
-  }
-
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  #menu-toggle {
-    font-size: 20px;
-  }
-      }
+            }
