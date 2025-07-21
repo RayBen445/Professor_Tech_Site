@@ -1,231 +1,90 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Professor_Tech</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    :root {
-      --text: #111;
-      --bg: #fff;
-    }
-    [data-theme="dark"] {
-      --text: #eee;
-      --bg: #111;
-    }
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-      background-size: 400% 400%;
-      animation: gradientFlow 2s ease infinite;
-      color: var(--text);
-      transition: background 1s, color 1s;
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    [data-theme="dark"] body {
-      background: #111 !important;
-      animation: none;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      color: white;
-    }
-    .menu-btn {
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      height: 100vh;
-      width: 250px;
-      background: #222;
-      color: white;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      z-index: 999;
-      transition: left 0.4s ease;
-    }
-    #sidebar.open {
-      left: 0;
-    }
-    #sidebar a {
-      color: white;
-      text-decoration: none;
-      margin: 0.5rem 0;
-    }
-    .main {
-      text-align: center;
-      padding: 2rem;
-    }
-    .dictionary, .music-search {
-      margin-top: 2rem;
-    }
-    input, select {
-      padding: 0.5rem;
-      font-size: 1rem;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      margin-left: 0.5rem;
-      font-size: 1rem;
-    }
-    .result {
-      margin-top: 1rem;
-      font-style: italic;
-    }
-    #overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.3);
-      display: none;
-      z-index: 998;
-    }
-    #overlay.show {
-      display: block;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professor-Tech 👨‍🏫📚</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/banner.png">
 </head>
 <body>
-  <div id="overlay" onclick="closeSidebar()"></div>
   <header>
-    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
-    <h1><i class="fas fa-laptop-code"></i> Professor_Tech</h1>
-    <div>
-      <select id="langSelect" onchange="changeLang()">
-        <option value="en">🌐 EN</option>
-        <option value="es">ES</option>
-        <option value="fr">FR</option>
-        <option value="de">DE</option>
-        <option value="yo">YO</option>
-        <!-- Add more languages as needed -->
-      </select>
-      <button onclick="toggleTheme()">🌓</button>
+    <img src="assets/banner.png" alt="Professor Tech Banner" class="banner" />
+    <h1>👨‍🏫 Professor-Tech</h1>
+    <p><span class="typed-text"></span><span class="cursor">&nbsp;</span></p>
+    <div class="btn-group">
+      <a href="https://t.me/ProfTechMVAI_Bot" target="_blank" class="btn">🤖 Telegram Bot</a>
+      <a href="https://github.com/Professor-Tech" target="_blank" class="btn">🌟 GitHub</a>
     </div>
-  </header>  <div id="sidebar">
-    <h2>Menu</h2>
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="dictionary.html"><i class="fas fa-book"></i> Dictionary</a>
-    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="games/spades.html">♠ Spades</a>
-    <a href="games/solitaire.html">♦ Solitaire</a>
-    <a href="games/ludo.html">🎲 Ludo</a>
-    <a href="games/snake.html">🐍 Snake</a>
-    <a href="games/tictactoe.html">⭕ TicTacToe</a>
-  </div>  <div class="main">
-    <h2 id="welcomeText">Welcome to Professor_Tech</h2>
-    <p>This is your daily hub for knowledge, tools, and games.</p><p id="datetime"></p>
-<p id="bible-verse"><em>Loading Bible verse...</em></p>
+  </header>
 
-<div class="dictionary">
-  <h3>Dictionary</h3>
-  <input type="text" id="wordInput" placeholder="Enter word...">
-  <button onclick="searchDefinition()">Search</button>
-  <div id="definition" class="result"></div>
-</div>
+  <main>
+    <section id="about">
+      <h2>🚀 About Me</h2>
+      <p>
+        I'm Professor 👨‍🏫📚 — Developer, Economics Student, and AI Architect. I love building intelligent bots, economic systems, and automated tech using Termux, GPT, Node.js, and SQLite.
+      </p>
+    </section>
 
-<div class="music-search">
-  <h3>Music Search</h3>
-  <input type="text" id="musicInput" placeholder="Search songs...">
-  <button onclick="searchMusic()">Find</button>
-  <div id="musicResults" class="result"></div>
-</div>
+    <section id="projects">
+      <h2>💡 Featured Projects</h2>
+      <ul>
+        <li><strong>Prof-Tech MVAI</strong> – Multi-AI bot with GPT-4o, Gemini, Meta + fallback logic</li>
+        <li><strong>Lautech Economics Portal</strong> – Student dashboard, secure login, course viewer</li>
+        <li><strong>Cool Shot Games</strong> – Upgraded browser games: Solitaire, Spades, AI, animations</li>
+      </ul>
+    </section>
 
-  </div>  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("overlay");
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("show");
-    }
+    <section id="github">
+      <h2>📊 GitHub Stats</h2>
+      <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
+    </section>
 
-    function closeSidebar() {
-      document.getElementById("sidebar").classList.remove("open");
-      document.getElementById("overlay").classList.remove("show");
-    }
+    <section id="contact">
+      <h2>📬 Contact Me</h2>
+      <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
+      <p>Telegram: <a href="https://t.me/ProfTechMVAI_Bot" target="_blank">@ProfTechMVAI_Bot</a></p>
+      <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
+    </section>
+  </main>
 
-    function toggleTheme() {
-      const theme = document.documentElement.getAttribute("data-theme");
-      document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
-    }
+  <footer>
+    <p>© 2025 Professor-Tech. Built with ❤️ and Termux.</p>
+  </footer>
 
-    async function searchDefinition() {
-      const word = document.getElementById("wordInput").value.trim();
-      const result = document.getElementById("definition");
-      if (!word) return;
-      result.innerHTML = "Searching...";
-      try {
-        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-        const data = await res.json();
-        if (data[0]?.meanings?.length > 0) {
-          const def = data[0].meanings[0].definitions[0].definition;
-          result.innerHTML = `<strong>${word}:</strong> ${def}`;
-        } else {
-          result.innerHTML = "Definition not found.";
+  <script>
+    const typedText = document.querySelector(".typed-text");
+    const cursor = document.querySelector(".cursor");
+    const phrases = [
+      "AI Systems Developer",
+      "Telegram Bot Engineer",
+      "Node.js Enthusiast",
+      "GPT API Integrator",
+      "SQLite + Termux Master"
+    ];
+    let i = 0, j = 0, current = "", isDeleting = false;
+
+    function type() {
+      current = phrases[i];
+      if (!isDeleting) {
+        typedText.textContent = current.substring(0, j++);
+        if (j > current.length) {
+          isDeleting = true;
+          setTimeout(type, 1000);
+          return;
         }
-      } catch (e) {
-        result.innerHTML = "Error fetching definition.";
+      } else {
+        typedText.textContent = current.substring(0, j--);
+        if (j < 0) {
+          isDeleting = false;
+          i = (i + 1) % phrases.length;
+        }
       }
+      setTimeout(type, isDeleting ? 50 : 100);
     }
 
-    async function searchMusic() {
-      const song = document.getElementById("musicInput").value.trim();
-      const container = document.getElementById("musicResults");
-      if (!song) return;
-      container.innerHTML = "Searching music...";
-      try {
-        const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song)}&limit=5`);
-        const data = await response.json();
-        container.innerHTML = data.results.map(track => `
-          <div>
-            <strong>${track.trackName}</strong> by ${track.artistName}<br>
-            <audio controls src="${track.previewUrl}"></audio>
-          </div>
-        `).join('<hr>');
-      } catch (e) {
-        container.innerHTML = "Error loading music.";
-      }
-    }
-
-    function updateTime() {
-      const dt = new Date();
-      document.getElementById("datetime").textContent = dt.toLocaleString();
-    }
-
-    async function loadVerse() {
-      try {
-        const res = await fetch("https://beta.ourmanna.com/api/v1/get/?format=json");
-        const data = await res.json();
-        const verse = data.verse.details.text + " — " + data.verse.details.reference;
-        document.getElementById("bible-verse").textContent = verse;
-      } catch (e) {
-        document.getElementById("bible-verse").textContent = "Failed to load Bible verse.";
-      }
-    }
-
-    function changeLang() {
-      const lang = document.getElementById("langSelect").value;
-      alert(`Language switching (demo): ${lang}`);
-      // Implement real i18n switching if desired
-    }
-
-    setInterval(updateTime, 1000);
-    updateTime();
-    loadVerse();
-  </script></body>
-  </html>
+    type();
+  </script>
+</body>
+</html>
