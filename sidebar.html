@@ -1,14 +1,41 @@
-<!-- sidebar.html --><nav id="sidebar" class="sidebar">
-  <button id="closeSidebar">✕</button>
-  <ul>
-    <li><a href="index.html">🏠 Home</a></li>
-    <li><a href="services.html">🛠 Services</a></li>
-    <li><a href="portfolio.html">📁 Portfolio</a></li>
-    <li><a href="contact.html">📞 Contact</a></li>
-    <li><a href="dictionary.html">📘 Dictionary</a></li>
-    <li><a href="bible.html">📖 Bible</a></li>
-    <li><a href="games/snake.html">🎮 Games</a></li>
-    <li><a href="apps/index.html">📥 Download Apps</a></li>
-    <li><a href="music/player.html">🎵 Music</a></li>
-  </ul>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor Tech | Sidebar</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/sidebar.js"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <h2>👨‍🏫 Prof-Tech</h2>
+        <button class="close-btn" id="closeSidebar">✖</button>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="dictionary.html">📖 Dictionary</a></li>
+          <li><a href="contact.html">📬 Contact</a></li>
+          <li><a href="bible.html">📜 Bible</a></li>
+          <li><a href="music.html">🎵 Music</a></li>
+          <li><a href="games.html">🎮 Games</a></li>
+          <li><a href="admin.html">🔐 Admin</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="main-header">
+        <button class="menu-btn" id="openSidebar">☰</button>
+        <h1>Welcome to Professor Tech</h1>
+      </header>
+      <section>
+        <p>This is the sidebar navigation template. Select a page on the left to navigate.</p>
+      </section>
+    </main>
+  </div>
+</body>
+  </html>
