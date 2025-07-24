@@ -2,23 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Professor-Tech — AI Systems Developer, Economics Student, and GPT Bot Engineer."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor-Tech 👨‍🏫📚</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/banner.png" />
+
+  <!-- Open Graph Tags -->
+  <meta name="description" content="Explore bots, tech projects, and economic systems built by Professor-Tech." />
   <meta property="og:title" content="Professor-Tech 👨‍🏫📚" />
   <meta property="og:image" content="https://files.catbox.moe/vsqy0l.jpg" />
-  <meta property="og:description" content="Explore bots, economic tools, and cool tech projects built by Professor-Tech." />
-
-  <title>Professor-Tech 👨‍🏫📚</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="assets/banner.png" type="image/png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+  <meta property="og:description" content="Developer, Economics Student, and AI Architect building cool stuff with GPT and Termux." />
 </head>
-<body>
-  <!-- Sidebar Toggle -->
+<body data-theme="dark">
+  <!-- Sidebar Toggle Button -->
   <div id="menu-toggle">☰</div>
 
-  <!-- Sidebar -->
+  <!-- Sidebar Navigation -->
   <aside id="sidebar" class="hidden">
+    <div class="brand">
+      <h2>👨‍🏫 Prof-Tech</h2>
+      <button class="close-btn" id="closeSidebar">✖</button>
+    </div>
     <nav>
       <ul>
         <li><a href="#about">🚀 About</a></li>
@@ -32,7 +43,7 @@
 
   <!-- Header -->
   <header>
-    <img src="assets/banner.png" alt="Professor Tech Banner" class="banner" />
+    <img src="https://files.catbox.moe/vsqy0l.jpg" alt="Professor-Tech Banner" class="banner" />
     <h1>👨‍🏫 Professor-Tech</h1>
     <p><span class="typed-text"></span><span class="cursor">&nbsp;</span></p>
     <div class="btn-group">
@@ -41,14 +52,13 @@
     </div>
   </header>
 
+  <!-- Main -->
   <main>
-    <!-- About Section -->
     <section id="about">
       <h2>🚀 About Me</h2>
       <p><span id="about-text" class="typed-text-alt"></span><span class="cursor-alt">|</span></p>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
       <h2>💡 Featured Projects</h2>
       <ul>
@@ -58,14 +68,12 @@
       </ul>
     </section>
 
-    <!-- GitHub Stats -->
     <section id="github">
       <h2>📈 GitHub Stats</h2>
       <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
       <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
       <h2>📬 Contact Me</h2>
       <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
@@ -73,17 +81,15 @@
       <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
     </section>
 
-    <!-- Back to Top Button -->
     <a href="#" class="back-to-top">⬆️ Back to Top</a>
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Professor-Tech. Built with ❤️ and Termux.</p>
+    <p>© 2025 Professor-Tech. Built with ❤️ using Termux, GPT APIs, and pure dedication.</p>
   </footer>
 
   <!-- Scripts -->
-  <script src="js/typing.js"></script>
-  <script src="js/sidebar.js"></script>
+  <script src="js/index.js" defer></script>
 </body>
-      </html>
+              </html>
