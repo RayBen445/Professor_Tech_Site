@@ -1,3 +1,5 @@
+hite;
+    }
 /* Reset */
 * {
   margin: 0;
@@ -5,13 +7,21 @@
   box-sizing: border-box;
 }
 
+/* Font & Background */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #00ffd5);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
   color: #ffffff;
   line-height: 1.6;
-  padding: 0;
-  margin: 0;
+}
+
+/* Animated Gradient */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Header */
@@ -39,7 +49,7 @@ header p {
   color: #f0f0f0;
 }
 
-/* Typing Animation Cursor */
+/* Typing Cursor */
 .cursor {
   display: inline-block;
   width: 10px;
@@ -53,7 +63,7 @@ header p {
   50% { background: transparent; }
 }
 
-/* Button group */
+/* Button Group */
 .btn-group {
   margin-top: 1rem;
 }
@@ -76,11 +86,14 @@ header p {
   transform: scale(1.05);
 }
 
-/* Main Sections */
+/* Main Content */
 main {
   padding: 2rem 1rem;
+  transition: margin-left 0.3s ease;
+  width: 100%;
 }
 
+/* Sections */
 section {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
@@ -111,7 +124,7 @@ section a:hover {
   text-decoration: underline;
 }
 
-/* GitHub stats images */
+/* GitHub Stats */
 section#github img {
   max-width: 100%;
   margin-top: 1rem;
@@ -128,98 +141,81 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Sidebar Layout */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.sidebar {
-  background: #111;
-  color: #fff;
-  width: 250px;
-  padding: 1rem;
+/* Sidebar */
+#sidebar {
   position: fixed;
   top: 0;
   left: -250px;
+  width: 250px;
   height: 100%;
+  background: #111;
+  padding: 1rem;
+  color: white;
   overflow-y: auto;
   transition: 0.3s ease;
   z-index: 999;
-  box-shadow: 5px 0 10px rgba(0,255,204,0.1);
+  box-shadow: 5px 0 10px rgba(0, 255, 204, 0.1);
 }
 
-.sidebar.active {
+#sidebar.show {
   left: 0;
 }
 
-.sidebar .brand {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#sidebar.hidden {
+  left: -250px;
 }
 
-.sidebar h2 {
+#sidebar h2 {
   color: #00ffd5;
 }
 
-.sidebar nav ul {
+#sidebar nav ul {
   list-style: none;
   margin-top: 2rem;
   padding-left: 0;
 }
 
-.sidebar nav ul li {
+#sidebar nav ul li {
   margin-bottom: 1.2rem;
 }
 
-.sidebar nav ul li a {
+#sidebar nav ul li a {
   color: #fff;
   text-decoration: none;
   font-size: 1.1rem;
   transition: 0.3s;
 }
 
-.sidebar nav ul li a:hover {
+#sidebar nav ul li a:hover {
   color: #00ffd5;
 }
 
-/* Main content with sidebar */
-main {
-  margin-left: 0;
-  padding: 2rem;
-  transition: margin-left 0.3s ease;
-  width: 100%;
-}
-
-.main-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-}
-
-.menu-btn, .close-btn {
-  background: #00ffd5;
-  border: none;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
+/* Menu Toggle */
+#menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 1.8rem;
   cursor: pointer;
+  background: #00ffd5;
+  color: #000;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
+  z-index: 1000;
 }
 
-.menu-btn:hover, .close-btn:hover {
+#menu-toggle:hover {
   background: #00bfa6;
   color: white;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
-  .sidebar {
+  #sidebar {
     left: -250px;
   }
 
-  .sidebar.active {
+  #sidebar.show {
     left: 0;
   }
 
@@ -246,45 +242,4 @@ main {
     display: block;
     margin: 0.5rem auto;
   }
-    }
-
-#sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background: #111;
-  padding: 1rem;
-  color: white;
-  overflow-y: auto;
-  transition: 0.3s ease;
-  z-index: 999;
-  box-shadow: 5px 0 10px rgba(0, 255, 204, 0.1);
-}
-
-#sidebar.show {
-  left: 0;
-}
-
-#sidebar.hidden {
-  left: -250px;
-}
-
-#menu-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 1.8rem;
-  cursor: pointer;
-  background: #00ffd5;
-  color: #000;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  z-index: 1000;
-}
-
-#menu-toggle:hover {
-  background: #00bfa6;
-  color: white;
-    }
+       }
