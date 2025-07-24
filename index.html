@@ -1,30 +1,36 @@
-to<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Professor-Tech — AI Systems Developer, Economics Student, and GPT Bot Engineer."/>
+  <meta property="og:title" content="Professor-Tech 👨‍🏫📚" />
+  <meta property="og:image" content="assets/banner.png" />
+  <meta property="og:description" content="Explore bots, economic tools, and cool tech projects built by Professor-Tech." />
+
   <title>Professor-Tech 👨‍🏫📚</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" type="image/png" href="assets/banner.png">
+  <link rel="icon" href="assets/banner.png" type="image/png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <!-- Sidebar Toggle Button -->
-<div id="menu-toggle" style="position: fixed; top: 20px; left: 20px; font-size: 1.8rem; cursor: pointer; z-index: 999;">
-  ☰
-</div>
+  <!-- Sidebar Toggle -->
+  <div id="menu-toggle">☰</div>
 
-<!-- Sidebar Navigation -->
-<div id="sidebar" class="hidden">
-  <nav>
-    <ul>
-      <li><a href="#about">🚀 About</a></li>
-      <li><a href="#projects">💡 Projects</a></li>
-      <li><a href="#github">📈 Stats</a></li>
-      <li><a href="#contact">📬 Contact</a></li>
-      <li><a href="#dictionary">📒 Dictionary</a><li>
-    </ul>
-  </nav>
-</div>
-  
+  <!-- Sidebar -->
+  <aside id="sidebar" class="hidden">
+    <nav>
+      <ul>
+        <li><a href="#about">🚀 About</a></li>
+        <li><a href="#projects">💡 Projects</a></li>
+        <li><a href="#github">📈 Stats</a></li>
+        <li><a href="#contact">📬 Contact</a></li>
+        <li><a href="#dictionary">📒 Dictionary</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Header -->
   <header>
     <img src="assets/banner.png" alt="Professor Tech Banner" class="banner" />
     <h1>👨‍🏫 Professor-Tech</h1>
@@ -33,115 +39,51 @@ to<!DOCTYPE html><html lang="en">
       <a href="https://t.me/ProfTechMVAIbot" target="_blank" class="btn">🤖 Telegram Bot</a>
       <a href="https://github.com/Professor-Tech" target="_blank" class="btn">🌟 GitHub</a>
     </div>
-  </header>  <main>
+  </header>
+
+  <main>
+    <!-- About Section -->
     <section id="about">
       <h2>🚀 About Me</h2>
       <p><span id="about-text" class="typed-text-alt"></span><span class="cursor-alt">|</span></p>
-    </section><section id="projects">
-  <h2>💡 Featured Projects</h2>
-  <ul>
-    <li><span class="project-typed" data-text="Prof-Tech MVAI – Multi-AI bot with GPT-4o, Gemini, Meta + fallback logic"></span></li>
-    <li><span class="project-typed" data-text="Lautech Economics Portal – Student dashboard, secure login, course viewer"></span></li>
-    <li><span class="project-typed" data-text="Cool Shot Games – Upgraded browser games: Solitaire, Spades, AI, animations"></span></li>
-  </ul>
-</section>
+    </section>
 
-<section id="github">
-  <h2>📈 GitHub Stats</h2>
-  <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
-</section>
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>💡 Featured Projects</h2>
+      <ul>
+        <li><span class="project-typed" data-text="Prof-Tech MVAI – Multi-AI bot with GPT-4o, Gemini, Meta + fallback logic"></span></li>
+        <li><span class="project-typed" data-text="Lautech Economics Portal – Student dashboard, secure login, course viewer"></span></li>
+        <li><span class="project-typed" data-text="Cool Shot Games – Upgraded browser games: Solitaire, Spades, AI, animations"></span></li>
+      </ul>
+    </section>
 
-<section id="contact">
-  <h2>📬 Contact Me</h2>
-  <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
-  <p>Telegram: <a href="https://t.me/ProfTechMVAI_Bot" target="_blank">@ProfTechMVAI_Bot</a></p>
-  <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
-</section>
+    <!-- GitHub Stats -->
+    <section id="github">
+      <h2>📈 GitHub Stats</h2>
+      <img src="https://github-readme-stats.vercel.app/api?username=Professor-Tech&show_icons=true&theme=radical" alt="GitHub Stats" />
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Professor-Tech&layout=compact&theme=radical" alt="Top Languages" />
+    </section>
 
-  </main>  <footer>
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>📬 Contact Me</h2>
+      <p>Email: <a href="mailto:oladoyeheritage445@gmail.com">oladoyeheritage445@gmail.com</a></p>
+      <p>Telegram: <a href="https://t.me/ProfTechMVAI_Bot" target="_blank">@ProfTechMVAI_Bot</a></p>
+      <p>Website: <a href="https://professor-tech.vercel.app" target="_blank">Cool Shot Designs</a></p>
+    </section>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">⬆️ Back to Top</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
     <p>© 2025 Professor-Tech. Built with ❤️ and Termux.</p>
-  </footer>  <script>
-    // Banner typing
-    const typedText = document.querySelector(".typed-text");
-    const cursor = document.querySelector(".cursor");
-    const phrases = [
-      "AI Systems Developer",
-      "Telegram Bot Engineer",
-      "Node.js Enthusiast",
-      "GPT API Integrator",
-      "SQLite + Termux Master"
-    ];
-    let i = 0, j = 0, current = "", isDeleting = false;
+  </footer>
 
-    function type() {
-      current = phrases[i];
-      if (!isDeleting) {
-        typedText.textContent = current.substring(0, j++);
-        if (j > current.length) {
-          isDeleting = true;
-          setTimeout(type, 1000);
-          return;
-        }
-      } else {
-        typedText.textContent = current.substring(0, j--);
-        if (j < 0) {
-          isDeleting = false;
-          i = (i + 1) % phrases.length;
-        }
-      }
-      setTimeout(type, isDeleting ? 50 : 100);
-    }
-
-    type();
-
-    // About typing
-    const aboutPhrases = [
-      "I'm Professor 👨‍🏫📚 — Developer, Economics Student, and AI Architect.",
-      "I love building intelligent bots, economic systems, and automated tech.",
-      "My tools include Termux, GPT APIs, Node.js, and SQLite databases."
-    ];
-    const aboutEl = document.getElementById("about-text");
-    const cursorAlt = document.querySelector(".cursor-alt");
-    let a = 0, b = 0, aDeleting = false;
-
-    function typeAbout() {
-      let text = aboutPhrases[a];
-      if (!aDeleting) {
-        aboutEl.textContent = text.substring(0, b++);
-        if (b > text.length) {
-          aDeleting = true;
-          setTimeout(typeAbout, 1500);
-          return;
-        }
-      } else {
-        aboutEl.textContent = text.substring(0, b--);
-        if (b < 0) {
-          a = (a + 1) % aboutPhrases.length;
-          aDeleting = false;
-        }
-      }
-      setTimeout(typeAbout, aDeleting ? 40 : 90);
-    }
-
-    setTimeout(typeAbout, 2000);
-
-    // Typing animation for each project <span>
-    function animateText(el, delay = 0) {
-      const text = el.getAttribute("data-text");
-      let idx = 0;
-
-      function draw() {
-        el.textContent = text.substring(0, idx++);
-        if (idx <= text.length) setTimeout(draw, 40);
-      }
-
-      setTimeout(draw, delay);
-    }
-
-    const projectSpans = document.querySelectorAll(".project-typed");
-    projectSpans.forEach((el, index) => {
-      animateText(el, 3000 + index * 1200);
-    });
-  </script></body>
-  </html>
+  <!-- Scripts -->
+  <script src="js/typing.js"></script>
+  <script src="js/sidebar.js"></script>
+</body>
+      </html>
