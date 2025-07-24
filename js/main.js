@@ -132,3 +132,37 @@ const observer = new IntersectionObserver(
 sections.forEach((section) => {
   if (section) observer.observe(section);
 });
+
+// === Theme Switcher ===
+const themeToggle = document.getElementById("themeToggle");
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.body.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    document.body.setAttribute("data-theme", newTheme);
+  });
+}
+
+// === Scroll-Linked Active Navigation ===
+const navLinks = document.querySelectorAll("#sidebar nav a");
+const sections = Array.from(navLinks).map(link => {
+  const id = link.getAttribute("href")?.replace("#", "");
+  return document.getElementById(id);
+}).filter(Boolean);
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.id;
+      const link = document.querySelector(`#sidebar nav a[href="#${id}"]`);
+      if (entry.isIntersecting && link) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+      }
+    });
+  },
+  { rootMargin: "-50% 0px -45% 0px", threshold: 0.5 }
+);
+
+sections.forEach((section) => observer.observe(section));
